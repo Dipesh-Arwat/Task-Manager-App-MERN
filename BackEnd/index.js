@@ -1,4 +1,4 @@
-require("./passport");
+// require("./passport");
 require("dotenv").config();
 const express = require("express");
 const nodemailer = require("nodemailer");
@@ -8,7 +8,7 @@ const authModel = require("./Models/Model");
 const bcrypt = require("bcrypt");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
-const passport = require("passport");
+// const passport = require("passport");
 const TodoRoutes = require("./Routes/TodoRoutes");
 const NoteRoutes = require("./Routes/NoteRoutes");
 const TaskRoutes = require("./Routes/TaskRoutes");
@@ -42,8 +42,8 @@ app.use(
   })
 );
 
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 app.get("/", (req, res) => {
   res.json(" hello ");
@@ -71,39 +71,39 @@ app.post("/register", async (req, res) => {
   }
 });
 
-//Google authentication using passport
+// //Google authentication using passport
 
-app.get(
-  "/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
-);
+// app.get(
+//   "/google",
+//   passport.authenticate("google", { scope: ["profile", "email"] })
+// );
 
-app.get(
-  "/google/callback",
-  passport.authenticate("google", {
-    failureRedirect: process.env.FRONTEND_DOMAIN,
-    successRedirect: `${process.env.FRONTEND_DOMAIN}/Home`,
-  })
-);
+// app.get(
+//   "/google/callback",
+//   passport.authenticate("google", {
+//     failureRedirect: process.env.FRONTEND_DOMAIN,
+//     successRedirect: `${process.env.FRONTEND_DOMAIN}/Home`,
+//   })
+// );
 
-//For Facebook Authentication
+// //For Facebook Authentication
 
-app.get("/facebook", passport.authenticate("facebook", { scope: ["email"] }));
+// app.get("/facebook", passport.authenticate("facebook", { scope: ["email"] }));
 
-app.get(
-  "/facebook/callback",
-  passport.authenticate("facebook", {
-    failureRedirect: process.env.FRONTEND_DOMAIN,
-    successRedirect: `${process.env.FRONTEND_DOMAIN}/Home`,
-  })
-);
+// app.get(
+//   "/facebook/callback",
+//   passport.authenticate("facebook", {
+//     failureRedirect: process.env.FRONTEND_DOMAIN,
+//     successRedirect: `${process.env.FRONTEND_DOMAIN}/Home`,
+//   })
+// );
 
 //Local Login
 app.post(
   "/login",
-  passport.authenticate("local", {
-    failureRedirect: process.env.FRONTEND_DOMAIN,
-  }),
+  // passport.authenticate("local", {
+  //   failureRedirect: process.env.FRONTEND_DOMAIN,
+  // }),
   (req, res) => {
     res.json({ success: "successfully logged in" });
   }
